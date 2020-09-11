@@ -9,7 +9,8 @@ export default class PersonDetails extends Component {
   swapiService = new SwapiService();
 
   state = {
-    person: null
+    person: null,
+    loading: true,
   }
 
   updatePerson() {
@@ -71,37 +72,3 @@ export default class PersonDetails extends Component {
     )
   }
 }
-
-// const PersonView = ({ person }) => {
-
-//   if(!person) {
-//     return;
-//   }
-
-//   const { name, gender, birthYear, eyeColor} = person;
-//   return (
-//     <Fragment>
-//       <img className="person-image"
-//         src="https://starwars-visualguide.com/assets/img/characters/3.jpg" 
-//         alt='hero'/>
-
-//       <div className="card-body">
-//         <h4>{name}</h4>
-//         <ul className="list-group list-group-flush">
-//           <li className="list-group-item">
-//             <span className="term">Gender</span>
-//             <span>{gender}</span>
-//           </li>
-//           <li className="list-group-item">
-//             <span className="term">birthday year</span>
-//             <span>{birthYear}</span>
-//           </li>
-//           <li className="list-group-item">
-//             <span className="term">Eye color</span>
-//             <span>{eyeColor}</span>
-//           </li>
-//         </ul>
-//       </div>
-//   </Fragment>
-//   );
-// }
