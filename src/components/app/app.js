@@ -5,10 +5,13 @@ import RandomPlanet from '../random-planet';
 import PersonPage from '../person-page';
 import ErrorButton from '../error-button';
 import ErrorIndicator from '../erorr-indicator';
+import SwapiService from '../../services';
 
 import './app.css';
 
 export default class App extends Component {
+
+  swapiService = new SwapiService();
 
   state = {
     showRandomPlanet: true,
