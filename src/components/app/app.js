@@ -22,7 +22,7 @@ import './app.css';
 
 export default class App extends Component {
 
-  swapiService = new DummySwapiService();
+  swapiService = new SwapiService();
 
   state = {
     showRandomPlanet: true
