@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import Spinner from '../spinner';
+import ErrorIndicator from '../erorr-indicator';
 
 const withData = (View) => {
   return class extends Component {
 
     state = {
-      data: null
+      data: null,
+      loading: true,
+      error: false
     };
 
     componentDidUpdate(prevProps) {
@@ -18,23 +21,43 @@ const withData = (View) => {
       this.update();
     }
 
-    update() {
-      this.props.getData()
-      .then((data) => {
-        this.setState({
-          data
-        });
+    onLoaded = (data) => {
+      this.setState({
+        data,
+        loading: false,
+        error: false
       });
+    };
+  
+    onError = (err) => {
+      this.setState({
+        loading: false,
+        error: true
+      })
+    }
+
+    update = () => {
+      this.props.getData()
+      .then(this.onLoaded)
+      .catch(this.onError);
     }
 
     render() {
-      const { data } = this.state;
+      const { data, loading, error } = this.state;
 
-      if (!data) {
-        return <Spinner />;
-      }
+      const hasData = !(error || loading)
 
-      return <View {...this.props} data={data} />;
+      const errorMessage = error ? <ErrorIndicator /> : null;
+      const spinner = loading ? <Spinner /> : null;
+      const context = hasData ? <View {...this.props} data={data}/> : null;
+
+      return (
+        <div>
+          {errorMessage}
+          {spinner}
+          {context}
+        </div>
+      );
     }
   };
 };
